@@ -22,6 +22,9 @@ config = {
     # Data parameters
     "shuffle": True,
     "drop_last": True,
+
+    # Experiment parameters
+    "frac_data": False   # only use small fraction of data?
 }
 
 # Seed for reproducibility
@@ -47,13 +50,9 @@ class MLP(torch.nn.Module):
 
 # load dataset from .pt files
 data_path = 'data/camUPDRS'
-train_dataset = torch.load(os.path.join(data_path, "train_1perc.pt"))
-valid_dataset = torch.load(os.path.join(data_path, "val_1perc.pt"))
+train_dataset = torch.load(os.path.join(data_path, "train_1perc.pt" if config["frac_data"] else "train.pt"))
+valid_dataset = torch.load(os.path.join(data_path, "val_1perc.pt" if config["frac_data"] else "val.pt"))
 test_dataset = torch.load(os.path.join(data_path, "test.pt"))
-
-print("train_dataset: ", train_dataset["samples"].shape)
-print("valid_dataset: ", valid_dataset["samples"].shape)
-print("test_dataset: ", test_dataset["samples"].shape)
 
 # convert to torch tensors
 X_train = torch.tensor(train_dataset["samples"], dtype=torch.float32)
@@ -62,6 +61,13 @@ X_val = torch.tensor(valid_dataset["samples"], dtype=torch.float32)
 y_val = torch.tensor(valid_dataset["labels"], dtype=torch.float32).unsqueeze(1)
 X_test = torch.tensor(test_dataset["samples"], dtype=torch.float32)
 y_test = torch.tensor(test_dataset["labels"], dtype=torch.float32).unsqueeze(1)
+
+# Print data info
+print("\n|| Data info: ||")
+print("X_train: ", X_train.shape)
+print("X_val: ", X_val.shape)
+print("X_test: ", X_test.shape)
+print()
 
 # make tensor datasets
 trainset = torch.utils.data.TensorDataset(X_train, y_train)
