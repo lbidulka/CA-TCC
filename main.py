@@ -33,6 +33,10 @@ parser.add_argument('--device',                     default='cuda:0',           
 parser.add_argument('--home_path',                  default=home_dir,           type=str,   help='Project home directory')
 args = parser.parse_args()
 
+# DEBUG
+data_perc = '1'
+# ----
+
 device = torch.device(args.device)
 experiment_description = args.experiment_description
 data_type = args.selected_dataset

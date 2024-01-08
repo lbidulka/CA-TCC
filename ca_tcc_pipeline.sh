@@ -1,6 +1,10 @@
-exp="HAR_experiment"
-run="HAR"
-dataset="HAR"
+exp="camUPDRS_experiment" #"HAR_experiment", camUPDRS_experiment
+run="camUPDRS" #"HAR", camUPDRS
+dataset="camUPDRS" #"HAR", camUPDRS
+
+# exp="HAR_experiment" #"HAR_experiment", camUPDRS_experiment
+# run="HAR" #"HAR", camUPDRS
+# dataset="HAR" #"HAR", camUPDRS
 
 start=0
 end=0

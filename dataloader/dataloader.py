@@ -66,6 +66,10 @@ def data_generator(data_path, configs, training_mode):
     valid_dataset = torch.load(os.path.join(data_path, "val.pt"))
     test_dataset = torch.load(os.path.join(data_path, "test.pt"))
 
+    print("train_dataset: ", train_dataset["samples"].shape)
+    print("valid_dataset: ", valid_dataset["samples"].shape)
+    print("test_dataset: ", test_dataset["samples"].shape)
+
     train_dataset = Load_Dataset(train_dataset, configs, training_mode)
     valid_dataset = Load_Dataset(valid_dataset, configs, training_mode)
     test_dataset = Load_Dataset(test_dataset, configs, training_mode)
